@@ -1,3 +1,7 @@
 .pointer {
 	cursor: pointer;
 }
+
+#sign-in {
+	border-radius: 25px;
+}
