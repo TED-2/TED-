@@ -1,9 +1,3 @@
-/* Pointer */
 .pointer {
 	cursor: pointer;
-}
-
-#sign-in {
-	border-radius: 25px;
-    margin: 20px;
 }
