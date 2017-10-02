@@ -5,3 +5,8 @@
 #sign-in {
 	border-radius: 25px;
 }
+
+.brand-logo {
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+}
