@@ -1,3 +1,8 @@
 .pointer {
 	cursor: pointer;
 }
+
+.brand-logo {
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+}
