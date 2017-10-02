@@ -18,37 +18,16 @@
 			<div class="card black" id="sign-in">
 				<div class="card-content white-text">
 
-					<!-- Sign Up section -->
-					<div id="signUp">
-						<span class="card-title">Sign Up</span>
-						<div class="row">
-							<form class="col s12">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix">contacts</i>
-										<input id="name" type="text" class="validate">
-										<label for="name">Username</label>
-									</div>
-									<div class="input-field col s12">
-										<i class="material-icons prefix">email</i>
-										<input id="signUpEmail" type="text" class="validate">
-										<label for="signUpEmail">Your Email</label>
-									</div>
-									<div class="input-field col s12">
-										<i class="material-icons prefix">lock_outline</i>
-										<input id="signUpPass" type="password" class="validate">
-										<label for="signUpPass">Your Password</label>
-									</div>
-									<div class="input-field col s12">
-										<i class="material-icons prefix">lock_outline</i>
-										<input id="checkPass" type="password" class="validate">
-										<label for="checkPass">Confirm Password</label>
-									</div>
-								</div>
-
-								<!-- Error message -->
-								<div class="row">
-									<span class="errorMsg"></span>
+				<!-- Sign Up section -->
+				<div id="signUp">
+					<span class="card-title">Sign Up</span>
+					<div class="row">
+						<form class="col s12">
+							<div class="row">
+								<div class="input-field col s8">
+									<i class="material-icons prefix">email</i>
+									<input id="signUpEmail" type="text" class="validate">
+									<label for="signUpEmail">Your Email</label>
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
@@ -79,6 +58,13 @@
 										<label for="signInPass">Your Password</label>
 									</div>
 								</div>
+							</div>
+							<div class="row">
+								<a class="pointer teal-text lighten-4" id="switchToSignIn">Already signed up? Click here to sign in.</a>
+							</div>
+						</form>
+					</div>
+				</div>
 
 								<!-- Error message -->
 								<div class="row">
@@ -92,8 +78,11 @@
 								<div class="row">
 									<a class="pointer pointer teal-text lighten-4" id="switchToSignUp">New to the site? Click here to sign up.</a>
 								</div>
-							</form>
-						</div>
+							</div>
+							<div class="row">
+								<a class="pointer teal-text lighten-4" id="switchToSignUp">New to the site? Click here to sign up.</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
