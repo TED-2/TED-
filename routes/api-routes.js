@@ -15,21 +15,41 @@ module.exports = function (app) {
 		res.render( "index" );
 	});
 
-	app.get( "/search", function (req, res) {
-		// res.render("ted2", {
-		// 	main_speaker: "Ken Robinson",
-		// 	url: "http://www.google.com"
-		// });						
+	app.get("/search", function (req, res) {
+
 		db.Talks.findAll({
 			where: {
-				main_speaker: "Ken Robinson"
+				main_speaker: req.query.name
 			}
 		}).then(function(data) {
-			res.render("ted2", {
-				talk: data
-			});						
+			console.log(data);
+			if(data.length > 0) {
+				res.render("ted2", {
+					talk: data
+				});	
+			} else {
+				res.render("noresults");
+			}
+					
+		}).catch(function(err){
+			res.send(err);
 		});
+		
 	});
+
+	// app.get( "/search", function (req, res) {
+	// 	var searchName = req.query;
+	// 	console.log(searchName);
+	// 	db.Talks.findAll({
+	// 		where: {
+	// 			main_speaker: searchName
+	// 		}
+	// 	}).then(function(data) {
+	// 		res.render("ted2", {
+	// 			talk: data
+	// 		});
+	// 	});
+	// });
 
 	app.get( "/users", function (req, res) {
 		db.User.findAll().then(function(data){
