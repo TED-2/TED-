@@ -5,7 +5,7 @@
 	<nav class="top-nav black">
 		<div class="container">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo red-text">TED<sup>2</sup></a>
+				<a href="/signin" class="brand-logo red-text">TED<sup>2</sup></a>
 			</div>
 		</div>
 	</nav>
@@ -20,24 +20,19 @@
 
 					<!-- Sign Up section -->
 					<div id="signUp">
-						<span class="card-title">Sign Up</span>
+						<span class="card-title">Register</span>
 						<div class="row">
-							<form class="col s12">
+							<form class="col s12" method="POST" action="/register">
 								<div class="row">
 									<div class="input-field col s12">
 										<i class="material-icons prefix">email</i>
-										<input id="signUpEmail" type="text" class="validate">
+										<input id="signUpEmail" type="text" class="validate" name="email">
 										<label for="signUpEmail">Your Email</label>
 									</div>
 									<div class="input-field col s12">
 										<i class="material-icons prefix">lock_outline</i>
-										<input id="signUpPass" type="password" class="validate">
+										<input id="signUpPass" type="password" class="validate" name="password">
 										<label for="signUpPass">Your Password</label>
-									</div>
-									<div class="input-field col s12">
-										<i class="material-icons prefix">lock_outline</i>
-										<input id="checkPass" type="password" class="validate">
-										<label for="checkPass">Confirm Password</label>
 									</div>
 								</div>
 
@@ -47,7 +42,7 @@
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
-										<a id="signUpBtn" class="btn waves-effect waves-red red col">Submit</a>
+										<button type="submit" id="signUpBtn" class="btn waves-effect waves-red red col">Submit</button>
 									</div>
 								</div>
 								<div class="row">
@@ -61,16 +56,16 @@
 					<div id="signIn">
 						<span class="card-title">Sign In</span>
 						<div class="row">
-							<form class="col s12">
+							<form class="col s12" method="POST" action="/login">
 								<div class="row">
 									<div class="input-field col s12">
 										<i class="material-icons prefix">email</i>
-										<input id="signInEmail" type="text" class="validate">
+										<input id="signInEmail" type="text" class="validate" name="email">
 										<label for="signInEmail">Your Email</label>
 									</div>
 									<div class="input-field col s12">
 										<i class="material-icons prefix">lock_outline</i>
-										<input id="signInPass" type="password" class="validate">
+										<input id="signInPass" type="password" class="validate" name="password">
 										<label for="signInPass">Your Password</label>
 									</div>
 								</div>
@@ -81,7 +76,7 @@
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
-										<a id="signInBtn" class="btn waves-effect waves-red red col">Submit</a>
+										<button type="submit" id="signInBtn" class="btn waves-effect waves-red red col">Submit</button>
 									</div>
 								</div>
 								<div class="row">
