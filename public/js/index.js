@@ -7,16 +7,15 @@ $( document ).ready( function () {
 
     // Log out the user when the logout button is clicked
     $( '#logOut' ).on( 'click', function () {
-        // firebase.auth().signOut();
     } );
 
-    // Switch right box from sign in to sign up
+    // Switch right box from sign in to register
     $( '#switchToSignUp' ).on( 'click', function () {
         $( '#signUp' ).show();
         $( '#signIn' ).hide();
     } );
 
-    // Switch right box from sign up to sign in
+    // Switch right box from register to sign in
     $( '#switchToSignIn' ).on( 'click', function () {
         $( '#signUp' ).hide();
         $( '#signIn' ).show();
