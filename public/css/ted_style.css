@@ -10,7 +10,3 @@
 .ted-card {
     border-radius: 25px;
 }
-
-input[type="search"] {
-	height: 64px !important; /* or height of nav */
-	}
