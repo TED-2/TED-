@@ -60,7 +60,6 @@ function sessionChecker ( req, res, next ) {
     }
 };
 
-// route for user signup
 app.route( '/' )
     .get( sessionChecker, ( req, res ) => {
         res.render( 'index' );
@@ -85,6 +84,7 @@ app.route( '/login' )
         } );
     } );
 
+// route for user registration
 app.route( '/register' )
     .post( ( req, res ) => {
         db.User.create( {
@@ -127,7 +127,7 @@ app.use( function ( req, res, next ) {
     res.status( 404 ).send( "Sorry can't find that!" );
 } );
 
-// Set Handlebars.
+// Set handlebars.
 var exphbs = require( 'express-handlebars' );
 
 app.engine( 'handlebars', exphbs( { 'defaultLayout': 'main' } ) );
