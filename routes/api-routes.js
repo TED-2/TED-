@@ -16,22 +16,19 @@ module.exports = function (app) {
 	});
 
 	app.get( "/search", function (req, res) {
-		res.render("ted2", {
-			main_speaker: "Ken Robinson",
-			url: "http://www.google.com"
-		});						
+		// res.render("ted2", {
+		// 	main_speaker: "Ken Robinson",
+		// 	url: "http://www.google.com"
+		// });						
 		db.Talks.findAll({
 			where: {
 				main_speaker: "Ken Robinson"
 			}
-		// }).then(function(data) {
-		// 	var hbsObject = res.json(data);
-		// 	console.log(hbsObject);
-		// 	res.render("ted2", {
-		// 		main_speaker: "Ken Robinson",
-		// 		url: "http://www.google.com"
-		// 	});						
-		// });
+		}).then(function(data) {
+			res.render("ted2", {
+				talk: data
+			});						
+		});
 	});
 
 	app.get( "/users", function (req, res) {
@@ -39,4 +36,4 @@ module.exports = function (app) {
 			res.json(data);
 		});
 	});
-};
+}

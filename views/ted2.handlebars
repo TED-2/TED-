@@ -22,11 +22,11 @@
 					<div id="signUp">
 						<span class="card-title">TED Talks</span>
 						<ul>
-							{{!-- {{#each talk}} --}}
+							{{#each talk}}
 								<li>
-									{{main_speaker}}, {{url}}
+									{{this.main_speaker}}, {{this.url}}
 								</li>
-							{{!-- {{/each}} --}}
+							{{/each}}
 						</ul>
 						</div>
 					</div>
