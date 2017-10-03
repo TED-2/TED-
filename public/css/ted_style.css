@@ -2,6 +2,10 @@
 	cursor: pointer;
 }
 
+nav ul li:hover {
+	background-color: dimgrey;
+ }
+
 .brand-logo {
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: bolder;

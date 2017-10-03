@@ -22,7 +22,6 @@ module.exports = function (app) {
 				main_speaker: req.query.name
 			}
 		}).then(function(data) {
-			console.log(data);
 			if(data.length > 0) {
 				res.render("ted2", {
 					talk: data
