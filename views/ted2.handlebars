@@ -1,11 +1,13 @@
 <!-- Navigation bar -->
 <div class="navbar-fixed">
-	<nav class="top-nav black">
-		<div class="container">
-			<div class="nav-wrapper">
-				<a href="/" class="brand-logo red-text">TED<sup>2</sup></a>
+	<nav class="black">
+		<div class="nav-wrapper">
+			<div class="container">
+				<a href="#" class="brand-logo red-text">TED<sup>2</sup></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="/logout">Logout</a></li>
+					<li>
+						Search
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -19,7 +21,13 @@
 				<div class="card-content white-text">
 					<div id="signUp">
 						<span class="card-title">TED Talks</span>
-						This is where the search results go.
+						<ul>
+							{{#each talk}}
+								<li>
+									{{this.main_speaker}}, {{this.url}}
+								</li>
+							{{/each}}
+						</ul>
 						</div>
 					</div>
 				</div>
