@@ -7,13 +7,36 @@
 // ===============================================================================
 // ROUTING
 // ===============================================================================
+var db = require("./../models");
 
-module.exports = function ( app ) {
-    app.get( '/', function ( req, res ) {
-        res.render( 'index' );
-    });
 
-    app.get( '/search', function (req, res) {
-        res.render ( 'ted2' );
-    });
+module.exports = function (app) {
+	app.get( "/", function (req, res) {
+		res.render( "index" );
+	});
+
+	app.get( "/search", function (req, res) {
+		res.render("ted2", {
+			main_speaker: "Ken Robinson",
+			url: "http://www.google.com"
+		});						
+		db.Talks.findAll({
+			where: {
+				main_speaker: "Ken Robinson"
+			}
+		// }).then(function(data) {
+		// 	var hbsObject = res.json(data);
+		// 	console.log(hbsObject);
+		// 	res.render("ted2", {
+		// 		main_speaker: "Ken Robinson",
+		// 		url: "http://www.google.com"
+		// 	});						
+		// });
+	});
+
+	app.get( "/users", function (req, res) {
+		db.User.findAll().then(function(data){
+			res.json(data);
+		});
+	});
 };
