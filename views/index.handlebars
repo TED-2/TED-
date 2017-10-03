@@ -1,96 +1,101 @@
+
+
 <!-- Navigation bar -->
 <div class="navbar-fixed">
 	<nav class="top-nav black">
 		<div class="container">
 			<div class="nav-wrapper">
-				<div class="left">
-					Logo here
-				</div>
-				<div class="right hide-on-med-and-down">
-					Other Stuff
-				</div>
+				<a href="/signin" class="brand-logo red-text">TED<sup>2</sup></a>
 			</div>
 		</div>
 	</nav>
 </div>
 
 <div class="container">
-	<!-- Right card for when you're logged out:  Sign In/Sign Up -->
-	<div class="col s12 m6">
-		<div class="card black" id="sign-in">
-			<div class="card-content white-text">
+	<div class="row">
+		<!-- Top card for when you're logged out:  Sign In/Sign Up -->
+		<div class="col s12">
+			<div class="card black ted-card" id="sign-in">
+				<div class="card-content white-text">
 
-				<!-- Sign Up section -->
-				<div id="signUp">
-					<span class="card-title">Sign Up</span>
-					<div class="row">
-						<form class="col s12">
-							<div class="row">
-								<div class="input-field col s8">
-									<i class="material-icons prefix">email</i>
-									<input id="signUpEmail" type="text" class="validate">
-									<label for="signUpEmail">Your Email</label>
+					<!-- Sign Up section -->
+					<div id="signUp">
+						<span class="card-title">Register</span>
+						<div class="row">
+							<form class="col s12" method="POST" action="/register">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">email</i>
+										<input id="signUpEmail" type="text" class="validate" name="email">
+										<label for="signUpEmail">Your Email</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock_outline</i>
+										<input id="signUpPass" type="password" class="validate" name="password">
+										<label for="signUpPass">Your Password</label>
+									</div>
 								</div>
-								<div class="input-field col s8">
-									<i class="material-icons prefix">lock_outline</i>
-									<input id="signUpPass" type="password" class="validate">
-									<label for="signUpPass">Your Password</label>
-								</div>
-								<div class="input-field col s8">
-									<i class="material-icons prefix">lock_outline</i>
-									<input id="checkPass" type="password" class="validate">
-									<label for="checkPass">Confirm Password</label>
-								</div>
-							</div>
 
-							<!-- Error message -->
-							<div class="row">
-								<span class="errorMsg"></span>
-							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<a id="signUpBtn" class="btn waves-effect waves-red red col">Submit</a>
+								<!-- Error message -->
+								<div class="row">
+									<span class="errorMsg"></span>
 								</div>
-							</div>
-							<div class="row">
-								<a class="pointer" id="switchToSignIn">Already signed up? Click here to sign in.</a>
-							</div>
-						</form>
+								<div class="row">
+									<div class="input-field col s12">
+										<button type="submit" id="signUpBtn" class="btn waves-effect waves-red red col">Submit</button>
+									</div>
+								</div>
+								<div class="row">
+									<a class="pointer teal-text lighten-4" id="switchToSignIn">Already signed up? Click here to sign in.</a>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<!-- Sign In Section -->
+					<div id="signIn">
+						<span class="card-title">Sign In</span>
+						<div class="row">
+							<form class="col s12" method="POST" action="/login">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">email</i>
+										<input id="signInEmail" type="text" class="validate" name="email">
+										<label for="signInEmail">Your Email</label>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix">lock_outline</i>
+										<input id="signInPass" type="password" class="validate" name="password">
+										<label for="signInPass">Your Password</label>
+									</div>
+								</div>
+
+								<!-- Error message -->
+								<div class="row">
+									<span class="errorMsg"></span>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<button type="submit" id="signInBtn" class="btn waves-effect waves-red red col">Submit</button>
+									</div>
+								</div>
+								<div class="row">
+									<a class="pointer pointer teal-text lighten-4" id="switchToSignUp">New to the site? Click here to sign up.</a>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
-
-				<!-- Sign In Section -->
-				<div id="signIn">
-					<span class="card-title">Sign In</span>
-					<div class="row">
-						<form class="col s12">
-							<div class="row">
-								<div class="input-field col s8">
-									<i class="material-icons prefix">email</i>
-									<input id="signInEmail" type="text" class="validate">
-									<label for="signInEmail">Your Email</label>
-								</div>
-								<div class="input-field col s8">
-									<i class="material-icons prefix">lock_outline</i>
-									<input id="signInPass" type="password" class="validate">
-									<label for="signInPass">Your Password</label>
-								</div>
-							</div>
-
-							<!-- Error message -->
-							<div class="row">
-								<span class="errorMsg"></span>
-							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<a id="signInBtn" class="btn waves-effect waves-red red col">Submit</a>
-								</div>
-							</div>
-							<div class="row">
-								<a class="pointer" id="switchToSignUp">New to the site? Click here to sign up.</a>
-							</div>
-						</form>
-					</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12">
+			<div class="card black ted-card" id="homeInfo">
+				<div class="card-content white-text">
+					<span class="card-title">What is <span class="brand-logo red-text">TED<sup>2</sup></span>?</span>
+					<p><span class="brand-logo red-text">TED<sup>2</sup></span> is a navigational tool to search the TED database.
+						Search off any topic or author and find the TED Talk along with links to other resources.</p>
 				</div>
 			</div>
 		</div>
