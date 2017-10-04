@@ -27,7 +27,6 @@ const Talks = {
         'type': Sequelize.TEXT,
         'allowNull': false
     },
-
     'title': {
         'type': Sequelize.STRING,
         'allowNull': false
@@ -39,8 +38,11 @@ const Talks = {
     'views': {
         'type': Sequelize.INTEGER,
         'allowNull': false
+    },
+    'view': {
+        'type': Sequelize.INTEGER,
+        'allowNull': false
     }
-
 };
 
 module.exports = Talks;

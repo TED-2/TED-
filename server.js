@@ -52,19 +52,15 @@ app.use( ( req, res, next ) => {
     next();
 } );
 
-
-
 // Routes
 // =============================================================
 require( './routes/html-routes.js' )( app );
-
 
 // Set handlebars.
 var exphbs = require( 'express-handlebars' );
 
 app.engine( 'handlebars', exphbs( { 'defaultLayout': 'main' } ) );
 app.set( 'view engine', 'handlebars' );
-
 
 if ( env === 'development' ) {
     // Syncing our sequelize models and then starting our express app
