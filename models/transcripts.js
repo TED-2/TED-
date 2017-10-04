@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var bcrypt = require('bcrypt-nodejs'); 
-// bcrypt is used to encrpt a user passwords
+
 
 var Sequelize = require("sequelize");
 // sequelize is a constructor function, so must be refernced as a var, as seen below
@@ -25,45 +24,27 @@ var sequelize = new Sequelize('ted_talks_db', 'root', 'SR1024xo', {
 
 // make a new table, using the 'define' function
 
-var Talks = sequelize.define("talks", {
-        
+var Transcripts = sequelize.define("transcripts", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    description: {
+        
+   transcript: {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    main_speaker: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    related_talks: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    tags: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-
-    title: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
+   
     url: {
         type: Sequelize.STRING,
         allowNull: false
     }
 
+},
+{
+    timestamps: false
 });
-Talks.sequelize.sync({force:false}).then(function() {
+Transcripts.sequelize.sync({force:false}).then(function() {
    console.log("we made it");
 });

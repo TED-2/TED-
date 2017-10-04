@@ -7,13 +7,16 @@
 // ===============================================================================
 // ROUTING
 // ===============================================================================
-var db = require("./../models");
 
+module.exports = function ( app ) {
+    app.get( '/', function ( req, res ) {
+        res.render( 'index' );
+    });
 
-module.exports = function (app) {
-	app.get( "/", function (req, res) {
-		res.render( "index" );
-	});
+    app.get( '/search', function (req, res) {
+        res.render ( 'ted2' );
+    });
+};
 
 	app.get("/search", function (req, res) {
 
