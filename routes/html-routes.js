@@ -40,7 +40,7 @@ module.exports = function ( app ) {
                     res.cookie( 'error', 'This user does not exist.' );
                     res.redirect( '/' );
                 } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
-                    res.cookie( 'eorr', 'Password is incorrect.' );
+                    res.cookie( 'error', 'Password is incorrect.' );
                     res.redirect( '/' );
                 } else {
                     req.session.user = user;
