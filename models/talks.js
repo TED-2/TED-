@@ -1,69 +1,74 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var bcrypt = require('bcrypt-nodejs'); 
-// bcrypt is used to encrpt a user passwords
 
-var Sequelize = require("sequelize");
-// sequelize is a constructor function, so must be refernced as a var, as seen below
-
-
-//Setting up connecction with mysql and a new db
-// var sequelize = new Sequelize('database_name', 'root', 'password');
-var sequelize = new Sequelize('ted_talks_db', 'root', 'SR1024xo', {
-    host: "localhost",
-    dialect: 'mysql',
-    pool:{
-        max: 5,
-        min: 0,
-        idle: 1000
-    } 
-   
-});
-
-
-// now begin to define models using this connection object
-
-// make a new table, using the 'define' function
-
-var Talks = sequelize.define("talks", {
-        
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    main_speaker: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    related_talks: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    tags: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-
-    title: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    url: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }
-
-});
-Talks.sequelize.sync({force:false}).then(function() {
-   console.log("we made it");
-});
+module.exports = function(sequelize, DataTypes) {
+	var Talk = sequelize.define("Talks", {
+		comments: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		description: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		duration: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		event: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		film_date: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		languages: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		main_speaker: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		name: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		num_speaker: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		published_date: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		ratings: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		related_talks: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		speaker_occupation: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		tags: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		title: {
+			type: DataTypes.TEXT,
+			allowNull: false
+		},
+		url: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+		},
+		views: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		}
+	});
+	return Talk;
+};

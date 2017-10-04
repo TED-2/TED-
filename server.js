@@ -108,7 +108,7 @@ app.get( '/ted2', ( req, res ) => {
     if ( req.session.user && req.cookies.user_sid ) {
         res.render( 'ted2' );
     } else {
-        res.redirect( '/login' );
+        res.redirect( '/' );
     }
 } );
 
@@ -121,6 +121,7 @@ app.get( '/logout', ( req, res ) => {
         res.redirect( '/login' );
     }
 } );
+
 
 // route for handling 404 requests(unavailable routes)
 app.use( function ( req, res, next ) {
@@ -138,15 +139,17 @@ app.set( 'view engine', 'handlebars' );
 require( './routes/api-routes.js' )( app );
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync( ).then( function () {
-    app.listen( PORT, function () {
-        console.log( 'App listening on PORT ' + PORT );
-    } );
-} );
+// db.sequelize.sync( ).then( function () {
+//     app.listen( PORT, function () {
+//         console.log( 'App listening on PORT ' + PORT );
+//     } );
+// } );
+
+var env = app.get("env");
 
 if(env === "development") {
 	// Syncing our sequelize models and then starting our express app
-	db.sequelize.sync( { "force": false } ).then( function () {
+	db.sequelize.sync( { "force": true } ).then( function () {
 		app.listen( PORT, function () {
 			console.log( "App listening on PORT " + PORT );
 		} );
@@ -159,4 +162,3 @@ if(env === "development") {
 		} );
 	} );
 }
-
