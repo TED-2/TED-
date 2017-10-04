@@ -13,7 +13,7 @@ const Transcripts = {
     },
 
     'url': {
-        'type': Sequelize.STRING,
+        'type': Sequelize.TEXT,
         'allowNull': false
     }
 

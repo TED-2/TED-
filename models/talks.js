@@ -33,7 +33,11 @@ const Talks = {
         'allowNull': false
     },
     'url': {
-        'type': Sequelize.STRING,
+        'type': Sequelize.TEXT,
+        'allowNull': false
+    },
+    'views': {
+        'type': Sequelize.INTEGER,
         'allowNull': false
     }
 
