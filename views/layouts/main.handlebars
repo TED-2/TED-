@@ -40,7 +40,8 @@
 			var errorCookie = Cookies.get('error');
 			
 			if(errorCookie){
-				Materialize.toast(errorCookie, 3000, 'rounded red') 
+			Materialize.toast(errorCookie, 3000, 'rounded red') 
+			Cookies.set('error', '');
 			}
 		});
 	</script>

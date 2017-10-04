@@ -36,10 +36,11 @@ module.exports = function ( app ) {
             var password = req.body.password;
 
             db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
-                // console.log( user );
                 if ( !user ) {
+                    res.cookie( 'error', 'This user does not exist.' );
                     res.redirect( '/' );
                 } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
+                    res.cookie( 'error', 'Password is incorrect.' );
                     res.redirect( '/' );
                 } else {
                     req.session.user = user;
@@ -56,7 +57,6 @@ module.exports = function ( app ) {
                 'password': req.body.password
             } )
                 .then( user => {
-                    // console.log( user );
                     req.session.user = user.dataValues;
                     res.redirect( 'ted2' );
                 } )
@@ -70,23 +70,22 @@ module.exports = function ( app ) {
     // route for user's dashboard
     app.get( '/ted2', ( req, res ) => {
         if ( req.session.user && req.cookies.user_sid ) {
-            db.Talks.findAll({
-                where: {
-                    main_speaker: req.query.name
+            db.Talks.findAll( {
+                'where': {
+                    'main_speaker': req.query.name
                 }
-            }).then(function(data) {
-                console.log("data.length is", data.length);
-                if(data.length > 0) {
-                    res.render("ted2", {
-                        talk: data
-                    });	
+            } ).then( function ( data ) {
+                console.log( 'data.length is', data.length );
+                if ( data.length > 0 ) {
+                    res.render( 'ted2', {
+                        'talk': data
+                    } );
                 } else {
-                    res.render("noresults");
+                    res.render( 'noresults' );
                 }
-                        
-            }).catch(function(err){
-                res.send(err);
-            });
+            } ).catch( function ( err ) {
+                res.send( err );
+            } );
         } else {
             res.cookie( 'error', 'You must be logged in to do that.' );
             res.redirect( '/login' );
@@ -102,7 +101,6 @@ module.exports = function ( app ) {
             res.redirect( '/login' );
         }
     } );
-
 
     // route for handling 404 requests(unavailable routes)
     app.use( function ( req, res, next ) {
