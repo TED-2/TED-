@@ -2,8 +2,9 @@
 // DEPENDENCIES
 // We need to include the path package to get the correct file path for our html
 // ===============================================================================
-var path = require( 'path' );
 
+// Requiring our models for syncing
+var db = require( '../models' );
 // ===============================================================================
 // ROUTING
 // ===============================================================================
@@ -14,8 +15,77 @@ module.exports = function ( app ) {
     // In each of the below cases the user is shown an HTML page of content
     // ---------------------------------------------------------------------------
 
-    // If no matching route is found default to home
-    app.get( '*', function ( req, res ) {
-        res.sendFile( path.join( __dirname, '../public/home.html' ) );
+// middleware function to check for logged-in users
+    function sessionChecker ( req, res, next ) {
+        if ( req.session.user && req.cookies.user_sid ) {
+            res.redirect( '/ted2' );
+        } else {
+            return next();
+        }
+    };
+
+    app.route( '/' )
+        .get( sessionChecker, ( req, res ) => {
+            res.render( 'index' );
+        } );
+
+    // route for user Login
+    app.route( '/login' )
+        .post( ( req, res ) => {
+            var email = req.body.email;
+            var password = req.body.password;
+
+            db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
+                if ( !user ) {
+                    res.cookie( 'error', 'This user does not exist.' );
+                    res.redirect( '/' );
+                } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
+                    res.cookie( 'error', 'Password is incorrect.' );
+                    res.redirect( '/' );
+                } else {
+                    req.session.user = user;
+                    res.redirect( '/ted2' );
+                }
+            } );
+        } );
+
+    // route for user registration
+    app.route( '/register' )
+        .post( ( req, res ) => {
+            db.User.create( {
+                'email': req.body.email,
+                'password': req.body.password
+            } )
+                .then( user => {
+                    req.session.user = user.dataValues;
+                    res.redirect( 'ted2' );
+                } )
+                .catch( error => {
+                    if ( error ) {
+                        res.cookie( 'error', error );
+                        res.redirect( '/' );
+                    }
+                } );
+        } );
+
+    // route for user's dashboard
+    app.get( '/ted2', ( req, res ) => {
+        if ( req.session.user && req.cookies.user_sid ) {
+            res.render( 'ted2' );
+        } else {
+            res.cookie( 'error', 'You must be logged in to do that.' );
+            res.redirect( '/login' );
+        }
+    } );
+
+    // route for user logout
+    app.get( '/logout', ( req, res ) => {
+        if ( req.session.user && req.cookies.user_sid ) {
+            res.clearCookie( 'user_sid' );
+            res.redirect( '/' );
+        } else {
+            res.cookie( 'error', 'You must be logged in to do that.' );
+            res.redirect( '/login' );
+        }
     } );
 };
