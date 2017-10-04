@@ -36,20 +36,6 @@ module.exports = function ( app ) {
         } );
     } );
 
-    // app.get( "/search", function (req, res) {
-    // 	var searchName = req.query;
-    // 	console.log(searchName);
-    // 	db.Talks.findAll({
-    // 		where: {
-    // 			main_speaker: searchName
-    // 		}
-    // 	}).then(function(data) {
-    // 		res.render("ted2", {
-    // 			talk: data
-    // 		});
-    // 	});
-    // });
-
     app.get( '/users', function ( req, res ) {
         db.User.findAll().then( function ( data ) {
             res.json( data );
