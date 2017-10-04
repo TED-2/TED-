@@ -36,10 +36,11 @@ module.exports = function ( app ) {
             var password = req.body.password;
 
             db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
-                // console.log( user );
                 if ( !user ) {
+                    res.cookie( 'error', 'This user does not exist.' );
                     res.redirect( '/' );
                 } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
+                    res.cookie( 'eorr', 'Password is incorrect.' );
                     res.redirect( '/' );
                 } else {
                     req.session.user = user;
@@ -56,7 +57,6 @@ module.exports = function ( app ) {
                 'password': req.body.password
             } )
                 .then( user => {
-                    // console.log( user );
                     req.session.user = user.dataValues;
                     res.redirect( 'ted2' );
                 } )
