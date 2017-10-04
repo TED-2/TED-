@@ -7,38 +7,35 @@
 // ===============================================================================
 // ROUTING
 // ===============================================================================
-const db = require( '../models/talks' );
+
+// Requiring our model
+const db = require("../models");
 
 module.exports = function ( app ) {
     app.get( '/', function ( req, res ) {
         res.render( 'index' );
     } );
 
-    app.get( '/search', function ( req, res ) {
-        res.render( 'ted2' );
-    } );
-
-    app.get( '/search', function ( req, res ) {
-        db.Talks.findAll( {
-            'where': {
-                'main_speaker': req.query.name
-            }
-        } ).then( function ( data ) {
-            if ( data.length > 0 ) {
-                res.render( 'ted2', {
-                    'talk': data
-                } );
-            } else {
-                res.render( 'noresults' );
-            }
-        } ).catch( function ( err ) {
-            res.send( err );
-        } );
-    } );
-
-    app.get( '/users', function ( req, res ) {
-        db.User.findAll().then( function ( data ) {
-            res.json( data );
-        } );
-    } );
-};
+	app.get("/ted2", function (req, res) {
+		if ( req.session.user && req.cookies.user_sid ) {
+			db.Talks.findAll({
+				where: {
+					main_speaker: req.query.name
+				}
+			}).then(function(data) {
+				if(data.length > 0) {
+					res.render("ted2", {
+						talk: data
+					});	
+				} else {
+					res.render("noresults");
+				}
+						
+			}).catch(function(err){
+				res.send(err);
+			});	
+		} else {
+			res.redirect( '/login' );
+		}
+	});
+}
