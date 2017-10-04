@@ -2,14 +2,14 @@
   "development": {
     "username": "root",
     "password": "MySQLpw0rd!",
-    "database": "ted",
+    "database": "ted_talks_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "julie": {
     "username": "root",
     "password": "root",
-    "database": "test",
+    "database": "ted_talks_db",
     "host": "127.0.0.1",
     "port": 8889,
     "dialect": "mysql"

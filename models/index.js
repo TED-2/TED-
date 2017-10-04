@@ -1,5 +1,7 @@
 'use strict';
 const UserModel = require( './user' );
+const TalksModel = require( './talks' );
+const TranscriptsModel = require( './transcripts' );
 
 const path = require( 'path' );
 const Sequelize = require( 'sequelize' );
@@ -36,10 +38,16 @@ const User = sequelize.define( 'users', UserModel, {
     }
 } );
 
+const Talks = sequelize.define( 'talks', TalksModel, {} );
+const Transcripts = sequelize.define( 'transcripts', TranscriptsModel, {
+    'timestamps': false
+} );
 /**
  * Add User model to the db export
  */
 db['User'] = User;
+db['Talks'] = Talks;
+db['Transcripts'] = Transcripts;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -9,12 +9,12 @@
 // ===============================================================================
 
 // Requiring our model
-var db = require("../models");
+const db = require("../models");
 
 module.exports = function ( app ) {
     app.get( '/', function ( req, res ) {
         res.render( 'index' );
-    });
+    } );
 
 	app.get("/ted2", function (req, res) {
 		if ( req.session.user && req.cookies.user_sid ) {
