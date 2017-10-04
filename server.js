@@ -52,11 +52,6 @@ app.use( ( req, res, next ) => {
     next();
 } );
 
-// route for handling 404 requests(unavailable routes)
-// app.use( function ( req, res, next ) {
-//     res.status( 404 ).send( "Sorry can't find that!" );
-// } );
-
 // Set handlebars.
 var exphbs = require( 'express-handlebars' );
 
