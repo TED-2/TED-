@@ -1,7 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var bcrypt = require('bcrypt-nodejs'); 
-// bcrypt is used to encrpt a user passwords
 
 var Sequelize = require("sequelize");
 // sequelize is a constructor function, so must be refernced as a var, as seen below
@@ -9,7 +7,7 @@ var Sequelize = require("sequelize");
 
 //Setting up connecction with mysql and a new db
 // var sequelize = new Sequelize('database_name', 'root', 'password');
-var sequelize = new Sequelize('ted_talks_db', 'root', 'SR1024xo', {
+var sequelize = new Sequelize('ted_talks_db', 'root', '', {
     host: "localhost",
     dialect: 'mysql',
     pool:{
