@@ -15,7 +15,7 @@ module.exports = function ( app ) {
     // In each of the below cases the user is shown an HTML page of content
     // ---------------------------------------------------------------------------
 
-// middleware function to check for logged-in users
+    // middleware function to check for logged-in users
     function sessionChecker ( req, res, next ) {
         if ( req.session.user && req.cookies.user_sid ) {
             res.redirect( '/ted2' );
@@ -36,11 +36,10 @@ module.exports = function ( app ) {
             var password = req.body.password;
 
             db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
+                // console.log( user );
                 if ( !user ) {
-                    res.cookie( 'error', 'This user does not exist.' );
                     res.redirect( '/' );
                 } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
-                    res.cookie( 'error', 'Password is incorrect.' );
                     res.redirect( '/' );
                 } else {
                     req.session.user = user;
@@ -57,12 +56,12 @@ module.exports = function ( app ) {
                 'password': req.body.password
             } )
                 .then( user => {
+                    // console.log( user );
                     req.session.user = user.dataValues;
                     res.redirect( 'ted2' );
                 } )
                 .catch( error => {
                     if ( error ) {
-                        res.cookie( 'error', error );
                         res.redirect( '/' );
                     }
                 } );
@@ -71,7 +70,23 @@ module.exports = function ( app ) {
     // route for user's dashboard
     app.get( '/ted2', ( req, res ) => {
         if ( req.session.user && req.cookies.user_sid ) {
-            res.render( 'ted2' );
+            db.Talks.findAll({
+                where: {
+                    main_speaker: req.query.name
+                }
+            }).then(function(data) {
+                console.log("data.length is", data.length);
+                if(data.length > 0) {
+                    res.render("ted2", {
+                        talk: data
+                    });	
+                } else {
+                    res.render("noresults");
+                }
+                        
+            }).catch(function(err){
+                res.send(err);
+            });
         } else {
             res.cookie( 'error', 'You must be logged in to do that.' );
             res.redirect( '/login' );
@@ -84,10 +99,10 @@ module.exports = function ( app ) {
             res.clearCookie( 'user_sid' );
             res.redirect( '/' );
         } else {
-            res.cookie( 'error', 'You must be logged in to do that.' );
             res.redirect( '/login' );
         }
     } );
+
 
     // route for handling 404 requests(unavailable routes)
     app.use( function ( req, res, next ) {
