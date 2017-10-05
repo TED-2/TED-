@@ -69,34 +69,34 @@ module.exports = function ( app ) {
 
     // route for user's dashboard
     app.get( '/ted2', ( req, res ) => {
-        if ( req.session.user && req.cookies.user_sid ) {
-            db.Talks.findAll( {
-                'where': {
-                    'main_speaker': req.query.name
-                }
-            }).then(function(data) {
-                console.log("data.length is", data.length);
-                if(data.length > 0) {
-                    var searchArray = [];
-                    for (var i = 0; i < data.length; i++) {
-                        var linkURL = data[i].url;
-                        var slicedURL = linkURL.slice(11);
-                        var stitchedURL = "https://embed" + slicedURL;
-                        data[i].embed = stitchedURL;
+        db.Talks.findAll( {
+            'where': {
+                'main_speaker': req.query.name
+            }
+        } ).then( function ( data ) {
+            console.log( 'data.length is', data.length );
+            if ( data.length > 0 ) {
+                var searchArray = [];
+                for ( var i = 0; i < data.length; i++ ) {
+                    var linkURL = data[i].url;
+                    var slicedURL = linkURL.slice( 11 );
+                    var stitchedURL = 'https://embed' + slicedURL;
+                    data[i].embed = stitchedURL;
+
+                    if ( data[i].tags ) {
+                        data[i].tags = JSON.parse( data[i].tags.replace( /'/g, '"' ) ).join( ', ' );
                     }
-                    res.render("ted2", {
-                        talk: data
-                    });	
-                } else {
-                    res.render( 'noresults' );
                 }
-            } ).catch( function ( err ) {
-                res.send( err );
-            } );
-        } else {
-            res.cookie( 'error', 'You must be logged in to do that.' );
-            res.redirect( '/login' );
-        }
+
+                res.render( 'ted2', {
+                    'talk': data
+                } );
+            } else {
+                res.render( 'noresults' );
+            }
+        } ).catch( function ( err ) {
+            res.send( err );
+        } );
     } );
 
     // route for user logout
@@ -105,7 +105,7 @@ module.exports = function ( app ) {
             res.clearCookie( 'user_sid' );
             res.redirect( '/' );
         } else {
-            res.redirect( '/login' );
+            res.redirect( '/' );
         }
     } );
 

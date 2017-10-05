@@ -35,10 +35,6 @@ const Talks = {
         'type': Sequelize.TEXT,
         'allowNull': false
     },
-    'views': {
-        'type': Sequelize.INTEGER,
-        'allowNull': false
-    },
     'view': {
         'type': Sequelize.INTEGER,
         'allowNull': false
