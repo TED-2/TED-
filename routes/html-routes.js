@@ -63,6 +63,7 @@ module.exports = function ( app ) {
                 } )
                 .catch( error => {
                     if ( error ) {
+                        res.cookie( 'error', 'You are registered. Please login.' );
                         res.redirect( '/' );
                     }
                 } );
