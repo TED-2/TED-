@@ -57,7 +57,7 @@
 			<div class="card black ted-card" id="resultsCard">
 				<div class="card-content white-text">
 					<div id="talksList">
-						<span class="card-title">{{this.main_speaker}} <a class="right btn red waves-effect vidButton" id="{{this.id}}">Video</a></span>
+						<span class="card-title"><a href="{{this.url}}" target="_blank">{{this.name}}</a> <a class="right btn red waves-effect vidButton" id="{{this.id}}">Video</a></span>
 						<div id="vid{{this.id}}" style="position:relative;height:0;padding-bottom:56.25%;display:none">
 							<iframe src="{{this.embed}}" 
 								width="854" height="480" style="position:absolute;left:0;top:0;width:100%;height:100%" 
@@ -65,13 +65,12 @@
 							</iframe>
 						</div>
 						<div>
-							<a href="{{this.url}}" target="_blank">{{this.name}}</a>
+							Other talks by <a href="/ted2?name={{this.main_speaker}}">{{this.main_speaker}}</a>
 						</div>
 						<div>
-							Page is: {{this.pageNum}}
-						</div>
-						<div>
-							{{this.tags}}
+							{{#each tags}}
+								| <a href="/ted2?subject={{this}}">{{this}}</a> |
+							{{/each}}
 						</div>
 					</div>
 				</div>
