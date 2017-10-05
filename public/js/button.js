@@ -1,3 +1,4 @@
+
 $( document ).ready( function () {
     // Saves the state of the Speaker Search card
     var speakerOpen = false;
@@ -58,7 +59,11 @@ $( document ).ready( function () {
         // Get the search term, trim it, and set to lowercase
         var searchName = $( '#speakerName' ).val().trim().toLowerCase();
         // Load the page with the name search
-        window.location.href = window.location.origin + '/ted2?name=' + searchName;
+        if ( searchName ) {
+            window.location.href = window.location.origin + '/ted2?name=' + searchName;
+        } else {
+            Materialize.toast( 'Please enter a valid name.', 3000, 'rounded red' );
+        }
     } );
 
     // When doing a Subject Search
@@ -68,7 +73,11 @@ $( document ).ready( function () {
         // Get the search term, trim it, and set to lowercase
         var subjectName = $( '#subjectName' ).val().trim().toLowerCase();
         // Load the page with the subject search
-        window.location.href = window.location.origin + '/ted2?subject=' + subjectName;
+        if ( subjectName ) {
+            window.location.href = window.location.origin + '/ted2?subject=' + subjectName;
+        } else {
+            Materialize.toast( 'Please enter a valid subject.', 3000, 'rounded red' );
+        }
     } );
 
     // When a Video button is clicked
