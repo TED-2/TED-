@@ -76,7 +76,6 @@ module.exports = function ( app ) {
         } ).then( function ( data ) {
             console.log( 'data.length is', data.length );
             if ( data.length > 0 ) {
-                var searchArray = [];
                 for ( var i = 0; i < data.length; i++ ) {
                     var linkURL = data[i].url;
                     var slicedURL = linkURL.slice( 11 );
