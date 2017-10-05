@@ -51,6 +51,9 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<span style="font-size: 24pt; font-weight: bold">Your Search Results</span>
+	</div>
 	{{#talk}}
 	<div class="row">
 		<div class="col s12">
@@ -80,59 +83,4 @@
 	{{/talk}}
 </div>
 
-<script>
-	$(document).ready(function() {
-		var speakerOpen = false;
-		var subjectOpen = false;
-		var videoOpen = false;
-
-		$("#speakerCard").css("display", "none");
-		$("#subjectCard").css("display", "none");
-
-		$("#speakerButton").click(function() {
-			if (!speakerOpen) {
-				$("#speakerCard").css("display", "block");
-				$("#subjectCard").css("display", "none");
-				speakerOpen = true;
-				subjectOpen = false;
-			}
-				else {
-					$("#speakerCard").css("display", "none");
-					searchOpen = false;
-				}
-		});
-
-		$("#subjectButton").click(function() {
-			if (!subjectOpen) {
-				$("#subjectCard").css("display", "block");
-				$("#speakerCard").css("display", "none");
-				subjectOpen = true;
-				speakerOpen = false;
-			}
-				else {
-					$("#subjectCard").css("display", "none");
-					subjectOpen = false;
-				}
-		});
-
-		$("#speakerBtn").on("click", function(event) {
-			event.preventDefault();
-			var searchName = $("#speakerName").val().trim().toLowerCase();
-			window.location.href = window.location.origin + "/ted2?name="+searchName;
-        });
-
-		$("#subjectBtn").on("click", function(event) {
-			event.preventDefault();
-			var subjectName = $("#subjectName").val().trim().toLowerCase();
-			window.location.href = window.location.origin + "/ted2?subject="+subjectName;
-        });
-
-		$(".vidButton").on("click", function() {
-			if ($("#vid" + this.id).css("display") === "block") {
-				$("#vid" + this.id).css("display", "none");
-			} else {
-				$("#vid" + this.id).css("display", "block");
-			}
-		})
-    });
-</script>
+<script src="./js/button.js"></script>
