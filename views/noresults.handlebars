@@ -6,7 +6,8 @@
 				<a href="#" class="brand-logo red-text">TED<sup>2</sup></a>
 				<ul id="nav-mobile" class="right">
 					<li><a class="pointer" href="/logout">Logout</a></li>
-					<li><a class="pointer" id="searchButton">Search</a></li>
+					<li><a class="pointer" id="speakerButton">Speaker Search</a></li>
+					<li><a class="pointer" id="subjectButton">Subject Search</a></li>
 				</ul>
 			</div>
 		</div>
@@ -14,17 +15,35 @@
 </div>
 
 <div class="container">
-	<div class="row" id="searchCard">
+	<div class="row" id="speakerCard">
 		<div class="col s12">
 			<div class="card black ted-card">
 				<div class="card-content white-text">
-					<div class = "row" id="search">
-						<span class="card-title">Search</span>
-						<form name="search-form">
+					<div class = "row" id="searchSpeaker">
+						<span class="card-title">Search for a Speaker</span>
+						<form name="speaker-form">
 							<div class="input-field col s12">
 								<input placeholder="Speaker" id="speakerName" type="text" class="validate">
 								<label for="speakerName">Speaker Name</label>
-								<button id="searchBtn" type="submit" class="btn waves-effect red">Submit</button>
+								<button id="speakerBtn" type="submit" class="btn waves-effect red">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="subjectCard">
+		<div class="col s12">
+			<div class="card black ted-card">
+				<div class="card-content white-text">
+					<div class = "row" id="searchSubject">
+						<span class="card-title">Search on a Subject</span>
+						<form name="subject-form">
+							<div class="input-field col s12">
+								<input placeholder="Subject" id="subjectName" type="text" class="validate">
+								<label for="subjectName">Subject</label>
+								<button id="subjectBtn" type="submit" class="btn waves-effect red">Submit</button>
 							</div>
 						</form>
 					</div>
@@ -37,9 +56,9 @@
 			<div class="card black ted-card" id="resultsCard">
 				<div class="card-content white-text">
 					<div id="talksList">
-						<span class="card-title">TED Talks</span>
+						<span class="card-title">No Results Found</span>
 						<ul>
-							<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://embed.ted.com/talks/ken_robinson_says_schools_kill_creativity" width="854" height="480" style="position:absolute;left:0;top:0;width:100%;height:100%" frameborder="0" scrolling="no" allowfullscreen></iframe></div>
+							We're sorry, but we couldn't find any talks for your search.  Please try again.
 						</ul>
 						</div>
 					</div>
@@ -51,22 +70,49 @@
 
 <script>
 	$(document).ready(function() {
-		var searchOpen = false;
-		$("#searchCard").css("display", "none");
-		$("#searchButton").click(function() {
-			if (!searchOpen) {
-				$("#searchCard").css("display", "block");
-				searchOpen = true;
+
+		// both speaker and subject are closed
+		// if you click the speaker search
+			// check to see if the speaker is open
+			// if it is, close it, set speaker to closed
+			// if it isn't, open it, set speaker to open, close subject, set subject to closed.
+		var speakerOpen = false;
+		var subjectOpen = false;
+		$("#speakerCard").css("display", "none");
+		$("#subjectCard").css("display", "none");
+		$("#speakerButton").click(function() {
+			if (!speakerOpen) {
+				$("#speakerCard").css("display", "block");
+				$("#subjectCard").css("display", "none");
+				speakerOpen = true;
+				subjectOpen = false;
 			}
 				else {
-					$("#searchCard").css("display", "none");
+					$("#speakerCard").css("display", "none");
 					searchOpen = false;
 				}
 		});
-		$("#searchBtn").on("click", function(event) {
+		$("#subjectButton").click(function() {
+			if (!subjectOpen) {
+				$("#subjectCard").css("display", "block");
+				$("#speakerCard").css("display", "none");
+				subjectOpen = true;
+				speakerOpen = false;
+			}
+				else {
+					$("#subjectCard").css("display", "none");
+					subjectOpen = false;
+				}
+		});
+		$("#speakerBtn").on("click", function(event) {
 			event.preventDefault();
 			var searchName = $("#speakerName").val().trim().toLowerCase();
 			window.location.href = window.location.origin + "/ted2?name="+searchName;
+        });
+		$("#subjectBtn").on("click", function(event) {
+			event.preventDefault();
+			var subjectName = $("#subjectName").val().trim().toLowerCase();
+			window.location.href = window.location.origin + "/ted2?subject="+subjectName;
         });
     });
 </script>

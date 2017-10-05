@@ -54,7 +54,6 @@ app.use( ( req, res, next ) => {
 
 // Routes
 // =============================================================
-// require( './routes/api-routes.js' )( app );
 require( './routes/html-routes.js' )( app );
 
 // Set handlebars.
