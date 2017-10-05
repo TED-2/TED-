@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "SR1024xo",
+    "password": "MySQLpw0rd!",
     "database": "ted_talks_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
