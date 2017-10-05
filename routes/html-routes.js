@@ -36,35 +36,37 @@ module.exports = function ( app ) {
 			var email = req.body.email;
 			var password = req.body.password;
 
-			db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
-				if ( !user ) {
-					res.redirect( '/' );
-				} else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
-					res.redirect( '/' );
-				} else {
-					req.session.user = user;
-					res.redirect( '/ted2' );
-				}
-			} );
-		} );
+            db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
+                if ( !user ) {
+                    res.cookie( 'error', 'This user does not exist.' );
+                    res.redirect( '/' );
+                } else if ( !user._modelOptions.instanceMethods.validPassword( password, user ) ) {
+                    res.cookie( 'error', 'Password is incorrect.' );
+                    res.redirect( '/' );
+                } else {
+                    req.session.user = user;
+                    res.redirect( '/ted2' );
+                }
+            } );
+        } );
 
-	// route for user registration
-	app.route( '/register' )
-		.post( ( req, res ) => {
-			db.User.create( {
-				'email': req.body.email,
-				'password': req.body.password
-			} )
-				.then( user => {
-					req.session.user = user.dataValues;
-					res.redirect( 'ted2' );
-				} )
-				.catch( error => {
-					if ( error ) {
-						res.redirect( '/' );
-					}
-				} );
-		} );
+    // route for user registration
+    app.route( '/register' )
+        .post( ( req, res ) => {
+            db.User.create( {
+                'email': req.body.email,
+                'password': req.body.password
+            } )
+                .then( user => {
+                    req.session.user = user.dataValues;
+                    res.redirect( 'ted2' );
+                } )
+                .catch( error => {
+                    if ( error ) {
+                        res.redirect( '/' );
+                    }
+                } );
+        } );
 
 	// route for user's dashboard
 	app.get( '/ted2', ( req, res ) => {
@@ -137,23 +139,22 @@ module.exports = function ( app ) {
 			}
 		} else {
 			res.cookie( 'error', 'You must be logged in to do that.' );
-			res.redirect( '/login' );
-		}
-	} );
-
-	// route for user logout
-	app.get( '/logout', ( req, res ) => {
-		if ( req.session.user && req.cookies.user_sid ) {
-			res.clearCookie( 'user_sid' );
 			res.redirect( '/' );
-		} else {
-			res.redirect( '/login' );
 		}
 	} );
 
+    // route for user logout
+    app.get( '/logout', ( req, res ) => {
+        if ( req.session.user && req.cookies.user_sid ) {
+            res.clearCookie( 'user_sid' );
+            res.redirect( '/' );
+        } else {
+            res.redirect( '/' );
+        }
+    } );
 
-	// route for handling 404 requests(unavailable routes)
-	app.use( function ( req, res, next ) {
-		res.status( 404 ).send( "Sorry can't find that!" );
-	} );
+    // route for handling 404 requests(unavailable routes)
+    app.use( function ( req, res, next ) {
+        res.status( 404 ).send( "Sorry can't find that!" );
+    } );
 };
