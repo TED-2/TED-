@@ -74,12 +74,19 @@ module.exports = function ( app ) {
                 'where': {
                     'main_speaker': req.query.name
                 }
-            } ).then( function ( data ) {
-                console.log( 'data.length is', data.length );
-                if ( data.length > 0 ) {
-                    res.render( 'ted2', {
-                        'talk': data
-                    } );
+            }).then(function(data) {
+                console.log("data.length is", data.length);
+                if(data.length > 0) {
+                    var searchArray = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var linkURL = data[i].url;
+                        var slicedURL = linkURL.slice(11);
+                        var stitchedURL = "https://embed" + slicedURL;
+                        data[i].embed = stitchedURL;
+                    }
+                    res.render("ted2", {
+                        talk: data
+                    });	
                 } else {
                     res.render( 'noresults' );
                 }
