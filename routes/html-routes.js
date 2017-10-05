@@ -11,30 +11,30 @@ const Op = db.Sequelize.Op;
 // ===============================================================================
 
 module.exports = function ( app ) {
-	// HTML GET Requests
-	// Below code handles when users "visit" a page.
-	// In each of the below cases the user is shown an HTML page of content
-	// ---------------------------------------------------------------------------
+    // HTML GET Requests
+    // Below code handles when users "visit" a page.
+    // In each of the below cases the user is shown an HTML page of content
+    // ---------------------------------------------------------------------------
 
-	// middleware function to check for logged-in users
-	function sessionChecker ( req, res, next ) {
-		if ( req.session.user && req.cookies.user_sid ) {
-			res.redirect( '/ted2' );
-		} else {
-			return next();
-		}
-	};
+    // middleware function to check for logged-in users
+    function sessionChecker ( req, res, next ) {
+        if ( req.session.user && req.cookies.user_sid ) {
+            res.redirect( '/ted2' );
+        } else {
+            return next();
+        }
+    };
 
-	app.route( '/' )
-		.get( sessionChecker, ( req, res ) => {
-			res.render( 'index' );
-		} );
+    app.route( '/' )
+        .get( sessionChecker, ( req, res ) => {
+            res.render( 'index' );
+        } );
 
-	// route for user Login
-	app.route( '/login' )
-		.post( ( req, res ) => {
-			var email = req.body.email;
-			var password = req.body.password;
+    // route for user Login
+    app.route( '/login' )
+        .post( ( req, res ) => {
+            var email = req.body.email;
+            var password = req.body.password;
 
             db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
                 if ( !user ) {
@@ -63,6 +63,7 @@ module.exports = function ( app ) {
                 } )
                 .catch( error => {
                     if ( error ) {
+                        res.cookie( 'error', 'You are registered. Please login.' );
                         res.redirect( '/' );
                     }
                 } );
