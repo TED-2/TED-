@@ -1,5 +1,8 @@
 const Sequelize = require( 'sequelize' );
 
+/**
+ * Set up the table framework for the database
+ */
 const Talks = {
     'id': {
         'type': Sequelize.INTEGER,
