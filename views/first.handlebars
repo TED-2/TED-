@@ -1,0 +1,98 @@
+<!-- Navigation bar -->
+<div class="navbar-fixed">
+	<nav class="black">
+		<div class="nav-wrapper">
+			<div class="container">
+				<a href="#" class="brand-logo red-text">TED<sup>2</sup></a>
+				<ul id="nav-mobile" class="right">
+					<li><a class="pointer" href="/logout">Logout</a></li>
+					<li><a class="pointer" id="speakerButton">Speaker Search</a></li>
+					<li><a class="pointer" id="subjectButton">Subject Search</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<div class="container">
+	<div class="row" id="speakerCard">
+		<div class="col s12">
+			<div class="card black ted-card">
+				<div class="card-content white-text">
+					<div class = "row" id="searchSpeaker">
+						<span class="card-title">Search for a Speaker</span>
+						<form name="speaker-form">
+							<div class="input-field col s12">
+								<input placeholder="Speaker" id="speakerName" type="text" class="validate">
+								<label for="speakerName">Speaker Name</label>
+								<button id="speakerBtn" type="submit" class="btn waves-effect red">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="subjectCard">
+		<div class="col s12">
+			<div class="card black ted-card">
+				<div class="card-content white-text">
+					<div class = "row" id="searchSubject">
+						<span class="card-title">Search on a Subject</span>
+						<form name="subject-form">
+							<div class="input-field col s12">
+								<input placeholder="Subject" id="subjectName" type="text" class="validate">
+								<label for="subjectName">Subject</label>
+								<button id="subjectBtn" type="submit" class="btn waves-effect red">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="noResultsCard">
+		<div class="col s12">
+			<div class="card black ted-card">
+				<div class="card-content white-text">
+					<div class = "row">
+						<span class="card-title">Welcome to <span class="brand-logo red-text">TED<sup>2</sup></span></span>
+						<p>Please do a search or see one of the most popular TED Talks shown below.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<span style="font-size: 24pt; font-weight: bold">Most Popular</span>
+	</div>
+	{{#talk}}
+	<div class="row">
+		<div class="col s12">
+			<div class="card black ted-card" id="resultsCard">
+				<div class="card-content white-text">
+					<div id="talksList">
+						<span class="card-title"><a href="{{this.url}}" target="_blank">{{this.name}}</a> <a class="right btn red waves-effect vidButton" id="{{this.id}}">Video</a></span>
+						<div id="vid{{this.id}}" style="position:relative;height:0;padding-bottom:56.25%;display:none">
+							<iframe src="{{this.embed}}" 
+								width="854" height="480" style="position:absolute;left:0;top:0;width:100%;height:100%" 
+								frameborder="0" scrolling="no" allowfullscreen>
+							</iframe>
+						</div>
+						<div>
+							Other talks by <a href="/ted2?name={{this.main_speaker}}">{{this.main_speaker}}</a>
+						</div>
+						<div>
+							{{#each tags}}
+								| <a href="/ted2?subject={{this}}">{{this}}</a> |
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/talk}}
+</div>
+
+<script src="./js/button.js"></script>
