@@ -1,4 +1,7 @@
 const expect = require( 'chai' ).expect;
+/**
+ * Required for http request.
+ */
 const request = require( 'request' );
 const db = require( '../models' );
 const newUser = {
@@ -23,6 +26,9 @@ after( () => {
         } );
 } );
 
+/**
+ * Testing registration.
+ */
 describe( 'Registration', () => {
     describe( 'Register a user', () => {
         it( 'should create user', ( done ) => {

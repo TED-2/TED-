@@ -5,7 +5,6 @@
 
 // Requiring our models for syncing
 var db = require( '../models' );
-const Op = db.Sequelize.Op;
 // ===============================================================================
 // ROUTING
 // ===============================================================================
@@ -36,6 +35,9 @@ module.exports = function ( app ) {
             var email = req.body.email;
             var password = req.body.password;
 
+            /**
+             * Finding one user by email.
+             */
             db.User.findOne( { 'where': { 'email': email } } ).then( function ( user ) {
                 if ( !user ) {
                     res.cookie( 'error', 'This user does not exist.' );
@@ -79,6 +81,9 @@ module.exports = function ( app ) {
                     }
                 } ).then( function ( data ) {
                     if ( data.length > 0 ) {
+                        /**
+                         * Formating data for disply
+                         */
                         for ( var i = 0; i < data.length; i++ ) {
                             data[i].embed = 'https://embed' + data[i].url.slice( 11 );
                             data[i].pageNum = Math.floor( i / 5 );
@@ -101,6 +106,9 @@ module.exports = function ( app ) {
                             ],
                             'limit': 5
                         } ).then( function ( noData ) {
+                            /**
+                             * Formating data for disply
+                             */
                             for ( var i = 0; i < noData.length; i++ ) {
                                 noData[i].embed = 'https://embed' + noData[i].url.slice( 11 );
                                 noData[i].pageNum = Math.floor( i / 5 );
@@ -132,6 +140,9 @@ module.exports = function ( app ) {
                     'limit': 5
                 } ).then( function ( data ) {
                     if ( data.length > 0 ) {
+                        /**
+                         * Formating data for disply
+                         */
                         for ( var i = 0; i < data.length; i++ ) {
                             data[i].embed = 'https://embed' + data[i].url.slice( 11 );
                             data[i].pageNum = Math.floor( i / 5 );
@@ -155,6 +166,9 @@ module.exports = function ( app ) {
                             'limit': 5
                         } ).then( function ( noData ) {
                             for ( var i = 0; i < noData.length; i++ ) {
+                                /**
+                                 * Formating data for disply
+                                 */
                                 noData[i].embed = 'https://embed' + noData[i].url.slice( 11 );
                                 noData[i].pageNum = Math.floor( i / 5 );
                                 var tagArray = noData[i].tags.split( "'" );
@@ -182,6 +196,9 @@ module.exports = function ( app ) {
                     'limit': 5
                 } ).then( function ( noData ) {
                     for ( var i = 0; i < noData.length; i++ ) {
+                        /**
+                         * Formating data for disply
+                         */
                         noData[i].embed = 'https://embed' + noData[i].url.slice( 11 );
                         noData[i].pageNum = Math.floor( i / 5 );
                         var tagArray = noData[i].tags.split( "'" );
