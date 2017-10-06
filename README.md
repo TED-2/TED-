@@ -10,7 +10,7 @@ TED² is a navigational tool to search the TED database.  We provide an interfac
 * Ricardo Alcazar
 
 ## Walkthrough
-Nagivate to TED² (https://median-man.github.io/codeDeck/).
+Nagivate to TED² (https://ted-squared.herokuapp.com/).
 On the front page, the user will see the information about TED².  Under the information, the user will see, "Sign In" where the user is able to login. If they are a new user, they will be able to select, "New to the site? Click here to sign up" to register. 
 
 When registering, the user is to sign up with an email address along with a password. After this is complete, they are directed to our popular views page.  If the user is already in the database, it will notify them that they are a registered user and asks the user to login and will redirect them to the sign on page.
